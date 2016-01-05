@@ -1,5 +1,7 @@
 # Wilson2
 
+![alt tag](https://github.com/mjrice/Wilson2/blob/master/doc/wilson-source-weblogo.png)
+
 This is the Wilson II - a reprap 3D printer based on Wilson TS
 
 The respository has these sub directories:
