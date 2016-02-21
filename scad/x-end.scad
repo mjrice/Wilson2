@@ -13,6 +13,7 @@ bearing_diameter = 19;   // 19=LM10UU 15=LM8UU
 bearing_cut_extra = 0.4; // extra cut for linear bearings so they are not too tight.
 thinwall = 3;            // thickness of the wall that holds in the linear bearings
 height = rod_distance+15;// height of the x ends
+m3_hole_r = 1.8;
 
 center_z = 30.25 -1;
 tensioner_size_z = 12;
@@ -51,6 +52,15 @@ module x_end_base(){
 
   translate(v=[5.5,-24,4]) cylinder(h=8,r=12.5,$fn=50,center=true);
               
+  // post for actuating z rack
+z_post_h = 14;
+  translate(v=[-14,-27.5,height+z_post_h/2]) { 
+  difference() {
+    cube(size=[15,10,z_post_h],center=true);
+    //rotate([90,0,0]) cylinder(h=20,r=m3_hole_r,$fn=50,center=true);
+  }
+
+}
 
 }
 
@@ -82,10 +92,10 @@ module x_end_holes(){
                // center post of brass nut
                    cylinder(h=10,r=5.45,$fn=50,center=true);
                    // holes for m3 screws in brass nut
-                   #translate(v=[8,0,0]) cylinder(h=12,r=1.8,$fn=20,center=true);
-                   #rotate([0,0,90]) translate(v=[8,0,0]) cylinder(h=12,r=1.8,$fn=20,center=true);
-                   #rotate([0,0,180]) translate(v=[8,0,0]) cylinder(h=12,r=1.8,$fn=20,center=true);
-                   #rotate([0,0,270]) translate(v=[8,0,0]) cylinder(h=12,r=1.8,$fn=20,center=true);
+                   #translate(v=[8,0,0]) cylinder(h=12,r=m3_hole_r,$fn=20,center=true);
+                   #rotate([0,0,90]) translate(v=[8,0,0]) cylinder(h=12,r=m3_hole_r,$fn=20,center=true);
+                   #rotate([0,0,180]) translate(v=[8,0,0]) cylinder(h=12,r=m3_hole_r,$fn=20,center=true);
+                   #rotate([0,0,270]) translate(v=[8,0,0]) cylinder(h=12,r=m3_hole_r,$fn=20,center=true);
            }
 
 }
@@ -165,7 +175,7 @@ module adjustomatic() { // small holder for a M3 screw pointing down toward the 
        translate(v=[-(15+17/2+adj_block_x/2),offs_adjuster_y,height-adj_block_z/2+14]) 
            {
          rotate([0,0,30]) #cylinder(h = 4, r = 7.5/2 , $fn = 6);
-         translate([0,0,-20]) #cylinder(h=30,r=2,$fn=16);
+         translate([0,0,-20]) #cylinder(h=30,r=m3_hole_r,$fn=16);
 }
 
    }
@@ -217,19 +227,19 @@ module x_end_motor_holes(){
   // Belt hole
   translate(v=[-14,1,0]) cube(size = [10,46,22], center = true);
   // Motor mounting holes
-  translate(v=[20,-15.5,-15.5]) rotate(a=[0,-90,0]) rotate(a=[0,0,90]) cylinder(h = 70, r=1.8, $fn=30);
+  translate(v=[20,-15.5,-15.5]) rotate(a=[0,-90,0]) rotate(a=[0,0,90]) cylinder(h = 70, r=m3_hole_r, $fn=30);
   translate(v=[1,-15.5,-15.5]) rotate(a=[0,-90,0]) rotate(a=[0,0,90]) cylinder(h = 12, r=screw_head_r, $fn=30);
  
 
-  translate(v=[20,-15.5,15.5]) rotate(a=[0,-90,0]) rotate(a=[0,0,90]) cylinder(h = 70, r=1.8, $fn=30);
+  translate(v=[20,-15.5,15.5]) rotate(a=[0,-90,0]) rotate(a=[0,0,90]) cylinder(h = 70, r=m3_hole_r, $fn=30);
   translate(v=[1,-15.5,15.5]) rotate(a=[0,-90,0]) rotate(a=[0,0,90]) cylinder(h = 12, r=screw_head_r, $fn=30);
 
 
-  translate(v=[20,15.5,-15.5]) rotate(a=[0,-90,0]) rotate(a=[0,0,90]) cylinder(h = 70, r=1.8, $fn=30);
+  translate(v=[20,15.5,-15.5]) rotate(a=[0,-90,0]) rotate(a=[0,0,90]) cylinder(h = 70, r=m3_hole_r, $fn=30);
   translate(v=[1,15.5,-15.5]) rotate(a=[0,-90,0]) rotate(a=[0,0,90]) cylinder(h = 12, r=screw_head_r, $fn=30);
 
 
-  translate(v=[20,15.5,15.5]) rotate(a=[0,-90,0]) rotate(a=[0,0,90]) cylinder(h = 70, r=1.8, $fn=30);
+  #translate(v=[20,15.5,15.5]) rotate(a=[0,-90,0]) rotate(a=[0,0,90]) cylinder(h = 70, r=m3_hole_r, $fn=30);
   translate(v=[1,15.5,15.5]) rotate(a=[0,-90,0]) rotate(a=[0,0,90]) cylinder(h = 12, r=screw_head_r, $fn=30);
 
   // Material saving cutout 
@@ -277,8 +287,8 @@ module x_end_motor(){
 }
 
 // Make parts
-//x_end_idler();
-translate([40,0,0]) rotate([0,0,180]) x_end_motor();
+x_end_idler();
+//translate([40,0,0]) rotate([0,0,180]) x_end_motor();
 
 
 
