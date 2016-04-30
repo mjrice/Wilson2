@@ -8,9 +8,9 @@
 include <configuration.scad>
 
 rod_distance = 50;       // vertical distance between X axis smooth rods (was 45mm on original prusa i3 xends)
-pushfit_d = 10.3;        // slightly larger than the rods themselves to accomodate extrusion
+pushfit_d = 10.2;        // slightly larger than the rods themselves to accomodate extrusion
 bearing_diameter = 19;   // 19=LM10UU 15=LM8UU
-bearing_cut_extra = 0.4; // extra cut for linear bearings so they are not too tight.
+bearing_cut_extra = 0.1; // extra cut for linear bearings so they are not too tight.
 thinwall = 3;            // thickness of the wall that holds in the linear bearings
 height = rod_distance+15;// height of the x ends
 m3_hole_r = 1.8;
